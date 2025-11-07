@@ -1,0 +1,22 @@
+{
+  "name": "web322-assignment2",
+  "version": "1.0.0",
+  "private": true,
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js",
+    "tw:build": "npx tailwindcss -c tailwind.config.js -i ./public/css/tailwind.css -o ./public/css/main.css --watch"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "ejs": "^3.1.10",
+    "daisyui": "^4.12.14"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.14",
+    "postcss": "^8.4.47",
+    "autoprefixer": "^10.4.20",
+    "@tailwindcss/typography": "^0.5.15"
+  }
+}

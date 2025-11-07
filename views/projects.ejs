@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en" data-theme="dim">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Projects — Ashmit George Climate Report</title>
+  <link rel="stylesheet" href="/css/main.css" />
+</head>
+<body class="min-h-screen">
+  <%- include('partials/navbar') %>
+  <main class="container mx-auto p-6">
+    <h1 class="text-3xl font-bold mb-4">Projects</h1>
+    <div class="overflow-x-auto rounded-box border">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Sector</th>
+            <th>Summary</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% projects.forEach(p => { %>
+            <tr>
+              <td class="font-medium"><%= p.title %></td>
+              <td>
+                <a class="btn btn-sm" href="/solutions/projects?sector=<%= encodeURIComponent(p.sector) %>">
+                  <%= p.sector %>
+                </a>
+              </td>
+              <td><%= p.summary_short %></td>
+              <td>
+                <a class="btn btn-primary btn-sm" href="/solutions/projects/<%= p.id %>">Details</a>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </main>
+</body>
+</html>

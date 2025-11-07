@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en" data-theme="dim">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title><%= project.title %> — Climate Solutions</title>
+  <link rel="stylesheet" href="/css/main.css" />
+</head>
+<body class="min-h-screen">
+  <%- include('partials/navbar') %>
+  <main class="container mx-auto p-6 prose">
+    <h1><%= project.title %></h1>
+    <p>Below, you will find detailed information about the project…</p>
+    <img src="<%= project.feature_img_url %>" alt="<%= project.title %>" class="rounded-box" />
+    <p><%= project.intro_short %></p>
+    <p><%= project.impact %></p>
+    <p>
+      <a class="btn" href="<%= project.original_source_url %>" target="_blank" rel="noopener">Learn more</a>
+    </p>
+
+    <blockquote id="q" class="italic"></blockquote>
+
+    <p><a class="btn" href="#" onclick="history.back(); return false;">Back</a></p>
+  </main>
+
+  <script>
+  document.addEventListener("DOMContentLoaded", async () => {
+    try {
+      const resp = await fetch("https://dummyjson.com/quotes/random");
+      const data = await resp.json();
+      document.getElementById("q").textContent = `"${data.quote}" — ${data.author}`;
+    } catch(e) { /* ignore */ }
+  });
+  </script>
+</body>
+</html>
