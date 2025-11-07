@@ -6,6 +6,7 @@
   "type": "commonjs",
   "scripts": {
     "start": "node server.js",
+    "build": "npx tailwindcss -c tailwind.config.js -i ./public/css/tailwind.css -o ./public/css/main.css",
     "tw:build": "npx tailwindcss -c tailwind.config.js -i ./public/css/tailwind.css -o ./public/css/main.css --watch"
   },
   "dependencies": {
