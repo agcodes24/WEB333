@@ -26,12 +26,22 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.static("public"));
 
 
-app.get("/", (req, res) => res.render("home"));
-app.get("/about", (req, res) => res.render("about"));
+const initReady = initialize();
 
+
+app.get("/", async (_req, res) => {
+  await initReady;
+  res.render("home");
+});
+
+app.get("/about", async (_req, res) => {
+  await initReady;
+  res.render("about");
+});
 
 app.get("/solutions/projects", async (req, res) => {
   try {
+    await initReady;
     const { sector } = req.query;
     const projects = sector
       ? await getProjectsBySector(sector)
@@ -48,9 +58,9 @@ app.get("/solutions/projects", async (req, res) => {
   }
 });
 
-
 app.get("/solutions/projects/:id", async (req, res) => {
   try {
+    await initReady;
     const id = Number(req.params.id);
     const project = await getProjectById(id);
     res.render("project", { project });
@@ -60,18 +70,22 @@ app.get("/solutions/projects/:id", async (req, res) => {
 });
 
 
-app.use((_req, res) => {
-  res.status(404).render("404", { message: "I'm sorry, we're unable to find what you're looking for" });
+app.use(async (_req, res) => {
+  await initReady;
+  res
+    .status(404)
+    .render("404", { message: "I'm sorry, we're unable to find what you're looking for" });
 });
 
 
-initialize()
+initReady
   .then(() => {
     if (!process.env.VERCEL) {
       app.listen(PORT, () => console.log(`Server running locally on ${PORT}`));
     }
   })
-  .catch(err => console.error("Initialization failed:", err));
+  .catch((err) => {
+    console.error("Initialization failed:", err);
+  });
 
 module.exports = app;
-
